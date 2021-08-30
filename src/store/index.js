@@ -7,9 +7,18 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     username: '',
+    token: getToken(),
   },
-  mutations: {},
-  getters: {},
+  mutations: {
+    setToken(state, newToken) {
+      state.token = newToken
+      // 设置了 token 的同时, 同步到本地cookies中
+      setToken(newToken);
+    },
+  },
+  getters: {
+    token: state => state.user.token,
+  },
   actions: {},
 });
 

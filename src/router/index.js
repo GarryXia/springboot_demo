@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 // import modules
+import Register from '@/components/login/RegisterPage';
 import Login from '@/components/login/LoginPage';
 import HelloWorld from '@/components/HelloWorld';
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register,
     },
   ],
 });

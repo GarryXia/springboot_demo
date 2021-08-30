@@ -17,6 +17,14 @@ const createLintingRule = () => ({
     formatter: require('eslint-friendly-formatter'),
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
+},
+// 增加tslint-loader
+{
+  test: /\.ts$/,
+  exclude: /node_modules/,
+  enforce: 'pre',
+  loader: 'tslint-loader',
+  include: [resolve('src'), resolve('test')],
 })
 
 module.exports = {
@@ -24,12 +32,20 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  devtool: 'inline-source-map',
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
+  },
+  resolve: {
+    extensions: ['.ts'],
+    alias: {
+      'vue$': 'src/vue-shims.d.ts',
+      '@': resolve('src'),
+    }
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -44,12 +60,29 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueLoaderConfig
+        options: vueLoaderConfig,
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+      },
+      // 增加ts-loader，用于解析ts
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        },
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules|vue\/src/,
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

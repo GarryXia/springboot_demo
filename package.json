@@ -14,12 +14,18 @@
     "axios": "^0.21.1",
     "element-ui": "^2.15.5",
     "es6-promise": "^4.2.8",
+    "js-cookie": "^3.0.0",
+    "ts-loader": "^3.5.0",
+    "tslint-loader": "^3.5.4",
+    "typescript": "^4.4.2",
     "vue": "^2.5.2",
     "vue-axios": "^3.2.5",
+    "vue-class-component": "^7.2.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.172",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
